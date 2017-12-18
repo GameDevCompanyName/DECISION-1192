@@ -1,4 +1,4 @@
-package game.groups.CharacterCreation;
+package game.utils;
 
 import javafx.scene.control.TextField;
 

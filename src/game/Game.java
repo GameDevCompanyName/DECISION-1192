@@ -12,7 +12,7 @@ public class Game extends Application {
 
         controller = new GameController(primaryStage);
         primaryStage.setTitle("DECISION#1192");
-        primaryStage.setFullScreen(false);
+        primaryStage.setFullScreen(true);
         controller.startGame();
         primaryStage.show();
 

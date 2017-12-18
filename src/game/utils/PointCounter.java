@@ -1,6 +1,7 @@
-package game.groups.CharacterCreation;
+package game.utils;
 
 
+import game.groups.CharacterCreation.ParameterChanger;
 import javafx.scene.control.Label;
 
 import java.util.ArrayList;

@@ -1,6 +1,7 @@
 package game.groups.CharacterCreation;
 
 import game.Logic.CharacterParameters;
+import game.utils.PointCounter;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;

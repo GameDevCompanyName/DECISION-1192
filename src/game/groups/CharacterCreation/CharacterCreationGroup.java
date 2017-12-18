@@ -1,10 +1,10 @@
 package game.groups.CharacterCreation;
 
 import game.GameController;
+import game.utils.PointCounter;
 import javafx.animation.FadeTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;

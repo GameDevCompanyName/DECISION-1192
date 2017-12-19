@@ -2,10 +2,12 @@ package game.groups.CharacterCreation;
 
 import game.Logic.CharacterParameters;
 import game.utils.PointCounter;
+import javafx.animation.FadeTransition;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.util.Duration;
 
 public class CreationMenu {
 
@@ -15,6 +17,8 @@ public class CreationMenu {
     private ParameterChanger cunnungChanger;
     private ParameterChanger mentalityChanger;
     private Label remainingLabel;
+    private FadeTransition fadeIn;
+    private FadeTransition fadeOut;
 
     public CreationMenu(PointCounter counter) {
 
@@ -34,6 +38,10 @@ public class CreationMenu {
                 remainingLabel);
 
         vBox.setAlignment(Pos.CENTER);
+        vBox.setOpacity(0.0);
+
+        fadeIn = new FadeTransition(Duration.seconds(1.5), vBox);
+        fadeOut = new FadeTransition(Duration.seconds(1.5), vBox);
 
     }
 
@@ -45,7 +53,22 @@ public class CreationMenu {
         remainingLabel.setFont(font);
     }
 
+    public void appear(){
+        vBox.setOpacity(0.0);
+        fadeIn.setFromValue(0.0);
+        fadeIn.setToValue(2.0);
+        fadeIn.playFromStart();
+    }
+
+    public void dissapear(){
+        vBox.setOpacity(1.0);
+        fadeOut.setFromValue(1.0);
+        fadeOut.setToValue(0.0);
+        fadeOut.playFromStart();
+    }
+
     public VBox getMenuBox() {
         return vBox;
     }
+
 }

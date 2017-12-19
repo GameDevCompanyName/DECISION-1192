@@ -64,8 +64,12 @@ public class GameController {
         return gameStage;
     }
 
-    public FadeTransition getFade() {
-        return fade.getFade();
+    public FadeTransition getFadeIn() {
+        return fade.getFadeIn();
+    }
+
+    public FadeTransition getFadeOut(){
+        return fade.getFadeOut();
     }
 
     public void fadeIn() {

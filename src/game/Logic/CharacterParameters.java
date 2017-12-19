@@ -15,4 +15,5 @@ public enum CharacterParameters {
     public String getName() {
         return name;
     }
+
 }

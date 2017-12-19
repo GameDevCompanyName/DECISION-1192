@@ -2,9 +2,9 @@ package game.groups.CharacterCreation;
 
 import game.GameController;
 import game.utils.PointCounter;
-import javafx.animation.FadeTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -13,7 +13,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Screen;
-import javafx.util.Duration;
 
 import java.io.File;
 
@@ -30,11 +29,9 @@ public class CharacterCreationGroup {
         Scene scene = controller.getGameScene();
         mainFont = Font.font("Courier New", FontWeight.BOLD, (int) (Math.sqrt(scene.getHeight()*scene.getWidth()) / 18));
 
-        PointCounter counter = new PointCounter(9);
-        CreationMenu creationMenu = new CreationMenu(counter);
+        CreationMenu creationMenu = new CreationMenu(new PointCounter(13));
 
         VBox menuBox = creationMenu.getMenuBox();
-
         creationMenu.setFont(mainFont);
 
         globalGroup = new Group();
@@ -62,19 +59,14 @@ public class CharacterCreationGroup {
         controller.getGameStage().onShowingProperty().addListener(changeListener);
 
         this.controller = controller;
+        globalGroup.setOpacity(1.0);
 
-        globalGroup.getChildren().add(imageView);
+        globalGroup.getChildren().addAll(imageView, menuBox);
 
-        menuBox.setOpacity(0.0);
-        FadeTransition fade = new FadeTransition(Duration.seconds(1.5), menuBox);
-        fade.setFromValue(0.0);
-        fade.setToValue(1.0);
-        globalGroup.getChildren().add(menuBox);
-
-        controller.getFade().setOnFinished(e ->
+        controller.getFadeIn().setOnFinished((ActionEvent e) ->
         {
             changeListener.changed(null, null, null);
-            fade.play();
+            creationMenu.appear();
         });
 
         controller.fadeIn();
@@ -86,7 +78,7 @@ public class CharacterCreationGroup {
         imageView.setScaleY(coef);
         imageView.setTranslateX(Screen.getPrimary().getBounds().getWidth()/2 - imageView.getImage().getWidth()/2);
         imageView.setTranslateY(Screen.getPrimary().getBounds().getHeight()/2 - imageView.getImage().getHeight()/2);
-        imageView.setOpacity(0.7);
+        imageView.setOpacity(0.5);
     }
 
     public static Group startCharacterCreation(GameController controller) {

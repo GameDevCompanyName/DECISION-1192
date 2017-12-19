@@ -31,7 +31,7 @@ public class ParameterChanger {
         this.parameter = parameter;
         parameterName = new Label(this.parameter.getName() + ": ");
         valueCounter = 0;
-        counterLabel = new Label(Integer.toString(valueCounter));
+        counterLabel = new Label("00");
         minus = new Button("-");
 
         boxParameter = new HBox();
@@ -80,7 +80,10 @@ public class ParameterChanger {
     }
 
     private void updateCounter() {
-        counterLabel.setText(Integer.toString(valueCounter));
+        if (valueCounter < 10)
+            counterLabel.setText("0" + Integer.toString(valueCounter));
+        else
+            counterLabel.setText(Integer.toString(valueCounter));
     }
 
     public void setFont(Font font){

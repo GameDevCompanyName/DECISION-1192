@@ -49,7 +49,7 @@ public class IntroGroup {
 
         globalGroup.getChildren().add(startGameText);
 
-        controller.getFade().setOnFinished(e ->
+        controller.getFadeIn().setOnFinished(e ->
         {
             animateText(startGameText, "НАЧАТЬ", 2000);
         });
@@ -75,7 +75,7 @@ public class IntroGroup {
                 startGameText.setTranslateY(controller.getGameScene().getHeight()/2 - startGameText.getLayoutBounds().getHeight()/2);
                 if (text.getText() == string){
                     text.setOnMousePressed(event -> {
-                        controller.getFade().setOnFinished(event1 -> {
+                        controller.getFadeOut().setOnFinished(event1 -> {
                             controller.changeGroup(GameGroups.CHAR_CREATION);
                         });
                         controller.fadeOut();

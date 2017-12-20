@@ -62,7 +62,7 @@ public class StartLoadingGroup extends StartableGroup {
 
 
         controller.getFadeIn().setOnFinished((ActionEvent event) -> {
-            animateText(consoleText, GameTexts.LOADING_TEXT, 5000, controller);
+            animateText(consoleText, GameTexts.LOADING_TEXT, 10000, controller);
         });
 
         controller.fadeIn();

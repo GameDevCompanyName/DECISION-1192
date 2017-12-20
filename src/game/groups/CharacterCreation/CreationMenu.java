@@ -1,6 +1,7 @@
 package game.groups.CharacterCreation;
 
 import game.Logic.CharacterParameters;
+import game.utils.FadableButton;
 import game.utils.PointCounter;
 import javafx.animation.FadeTransition;
 import javafx.geometry.Pos;
@@ -20,9 +21,9 @@ public class CreationMenu {
     private FadeTransition fadeIn;
     private FadeTransition fadeOut;
 
-    public CreationMenu(PointCounter counter) {
+    public CreationMenu(PointCounter counter, FadableButton fbutton) {
 
-        nameChanger = new NameChanger();
+        nameChanger = new NameChanger(fbutton);
         speechChanger = new ParameterChanger(counter, CharacterParameters.SPEECH);
         cunnungChanger = new ParameterChanger(counter, CharacterParameters.CUNNING);
         mentalityChanger = new ParameterChanger(counter, CharacterParameters.MENTALITY);

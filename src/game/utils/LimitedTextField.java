@@ -25,6 +25,7 @@ public class LimitedTextField extends TextField {
     private void verify() {
         if (getText().length() > limit) {
             setText(getText().substring(0, limit));
+            positionCaret(limit);
         }
     }
 };

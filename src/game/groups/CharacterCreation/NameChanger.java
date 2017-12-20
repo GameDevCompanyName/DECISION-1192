@@ -1,5 +1,6 @@
 package game.groups.CharacterCreation;
 
+import game.utils.FadableButton;
 import game.utils.LimitedTextField;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -14,11 +15,18 @@ public class NameChanger {
     private LimitedTextField fieldName;
 
 
-    public NameChanger() {
+    public NameChanger(FadableButton fbutton) {
 
         labelName = new Label("ИМЯ:");
         fieldName = new LimitedTextField(9);
         fieldName.setBackground(Background.EMPTY);
+        fieldName.textProperty().addListener(event -> {
+            if (fieldName.getText().isEmpty())
+                fbutton.dissapear();
+            else
+                if (fbutton.getOpacity() == 0.0)
+                    fbutton.appear();
+        });
         boxName = new HBox();
         boxName.getChildren().addAll(labelName, fieldName);
         boxName.setSpacing(0);

@@ -10,13 +10,13 @@ public class FadableButton extends Button {
 
         super(text);
 
-        if (true)
+        if (visibleAtStart)
             this.setOpacity(1.0);
         else
             this.setOpacity(0.0);
     }
 
-    FadeTransition fade = new FadeTransition(Duration.seconds(2), this);
+    FadeTransition fade = new FadeTransition(Duration.seconds(0.3), this);
 
     public void appear(){
         fade.setFromValue(0.0);

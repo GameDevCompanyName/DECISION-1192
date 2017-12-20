@@ -12,25 +12,25 @@ public class FadePane {
     private Rectangle blackie = new Rectangle(Screen.getPrimary().getBounds().getWidth(),
                                               Screen.getPrimary().getBounds().getHeight());
 
-    protected FadeTransition fadeIn = new FadeTransition(Duration.seconds(3), blackie);
-    protected FadeTransition fadeOut = new FadeTransition(Duration.seconds(3), blackie);
+    protected FadeTransition fadeIn = new FadeTransition(Duration.seconds(2.5), blackie);
+    protected FadeTransition fadeOut = new FadeTransition(Duration.seconds(2.5), blackie);
 
 
     public FadePane(Group group){
-
         group.getChildren().add(blackie);
         blackie.setFill(Color.BLACK);
         blackie.setOpacity(1.0);
-
     }
 
     public void fadeIn() {
+        blackie.setOpacity(1.0);
         fadeIn.setFromValue(1.0);
         fadeIn.setToValue(0.0);
         fadeIn.playFromStart();
     }
 
     public void fadeOut() {
+        blackie.setOpacity(0.0);
         fadeOut.setFromValue(0.0);
         fadeOut.setToValue(1.0);
         fadeOut.playFromStart();

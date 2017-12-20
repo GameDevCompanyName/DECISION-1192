@@ -2,11 +2,14 @@ package game;
 
 import game.groups.*;
 import game.groups.CharacterCreation.CharacterCreationGroup;
+import game.groups.Intro.IntroGroup;
+import game.groups.StartLoading.StartLoadingGroup;
 import game.utils.FadePane;
 import game.utils.GameState;
 import javafx.animation.FadeTransition;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -17,7 +20,7 @@ public class GameController {
     private final Scene gameScene;
     private final Group totalGroup;
 
-    private Group activeGroup;
+    private Pane activePane;
 
     private GameState state;
 
@@ -38,21 +41,21 @@ public class GameController {
     public void startGame() {
 
         gameStage.setScene(gameScene);
-        Group intro = IntroGroup.startIntro(this);
-        activeGroup = intro;
-        totalGroup.getChildren().add(intro);
+        Pane start = StartLoadingGroup.startStartLoading(this);
+        activePane = start;
+        totalGroup.getChildren().add(start);
 
     }
 
     public void runIntro(){
-        Group intro = IntroGroup.startIntro(this);
-        activeGroup = intro;
+        Pane intro = IntroGroup.startIntro(this);
+        activePane = intro;
         totalGroup.getChildren().add(intro);
     }
 
     private void runCharCreation() {
-        Group creation = CharacterCreationGroup.startCharacterCreation(this);
-        activeGroup = creation;
+        Pane creation = CharacterCreationGroup.startCharacterCreation(this);
+        activePane = creation;
         totalGroup.getChildren().add(creation);
     }
 
@@ -82,7 +85,7 @@ public class GameController {
 
     public void changeGroup(GameGroups gameGroups) {
 
-        totalGroup.getChildren().remove(activeGroup);
+        totalGroup.getChildren().remove(activePane);
 
         switch (gameGroups){
             case INTRO:

@@ -1,8 +1,6 @@
-package game.groups.StartLoading;
+package game;
 
 public class GameTexts {
-
-
 
     public static final String LOADING_TEXT = "Инициализация ИИ… готово.\n" +
             "Загрузка основных протоколов… готово.\n" +

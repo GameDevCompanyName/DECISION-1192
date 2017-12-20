@@ -1,14 +1,18 @@
 package game.Logic;
 
+import java.util.Random;
+
 public class Character {
 
     private String name;
+    private String ID;
     private int speech;
     private int cunning;
     private int mentality;
 
     public Character(String name, int speech, int cunning, int mentality) {
         this.name = name;
+        ID = Integer.toString(new Random().nextInt(100000));
         this.speech = speech;
         this.cunning = cunning;
         this.mentality = mentality;
@@ -16,6 +20,10 @@ public class Character {
 
     public String getName() {
         return name;
+    }
+
+    public String getID(){
+        return ID;
     }
 
     public int getSpeech() {

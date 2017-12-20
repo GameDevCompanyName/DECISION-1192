@@ -5,6 +5,8 @@ import game.GameTexts;
 import game.groups.GameGroups;
 import game.groups.StartableGroup;
 import javafx.animation.Animation;
+import javafx.animation.FadeTransition;
+import javafx.animation.ScaleTransition;
 import javafx.animation.Transition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -18,6 +20,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.util.Duration;
 
@@ -47,26 +50,45 @@ public class StartLoadingGroup extends StartableGroup {
         consoleText.setTextFill(Color.LIGHTGREEN);
         globalGroup.getChildren().add(consoleText);
 
+        Text title = new Text(GameTexts.randomLoadingText());
+        alignTitle(title, scene);
+        title.setOpacity(0.0);
+        title.setFill(Color.LIGHTGREEN);
+        globalGroup.getChildren().add(title);
+
         ChangeListener changeListener = new ChangeListener() {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                 double coef = Screen.getPrimary().getBounds().getHeight()/image.getHeight() * 1.5;
                 scaleCenterImage(imageView, coef);
                 consoleText.setFont(Font.font("Courier New", FontWeight.NORMAL, (int) (Math.sqrt(scene.getHeight()*scene.getWidth()) / 75)));
+                alignTitle(title, scene);
             }
         };
 
         scene.widthProperty().addListener(changeListener);
         scene.heightProperty().addListener(changeListener);
+        title.scaleXProperty().addListener(changeListener);
+        title.scaleYProperty().addListener(changeListener);
         controller.getGameStage().fullScreenProperty().addListener(changeListener);
 
 
+
+        changeListener.changed(null, null, null);
         controller.getFadeIn().setOnFinished((ActionEvent event) -> {
-            animateText(consoleText, GameTexts.LOADING_TEXT, 10000, controller);
+            animateText(consoleText, GameTexts.LOADING_TEXT, 5000, controller);
+            title.setFont(Font.font("Courier New", FontWeight.NORMAL, (int) (Math.sqrt(scene.getHeight()*scene.getWidth()) / 25)));
         });
 
+        titleAppend(title, 4000);
         controller.fadeIn();
 
+    }
+
+    private void alignTitle(Text text, Scene scene) {
+        text.setTranslateX(scene.getWidth()*0.22 - text.getLayoutX()/2);
+        text.setTranslateY(scene.getWidth()*0.24 - text.getLayoutY()/2);
+        text.setFont(Font.font("Century Gothic", FontWeight.LIGHT, (int) (Math.sqrt(scene.getHeight()*scene.getWidth()) / 7)));
     }
 
     private void scaleCenterImage(ImageView imageView, double coef) {
@@ -98,6 +120,26 @@ public class StartLoadingGroup extends StartableGroup {
         };
 
         animation.play();
+
+    }
+
+    public void titleAppend(Text text, int time) {
+
+        Duration durationFade = Duration.millis(time);
+        Duration durationScale = Duration.millis(time * 4);
+
+        FadeTransition fadeTransition = new FadeTransition(durationFade, text);
+        fadeTransition.setFromValue(0.0);
+        fadeTransition.setToValue(0.1);
+
+        ScaleTransition scaleTransition = new ScaleTransition(durationScale, text);
+        scaleTransition.setFromX(0.85);
+        scaleTransition.setToX(1.15);
+        scaleTransition.setFromY(0.95);
+        scaleTransition.setToY(1.05);
+
+        scaleTransition.playFromStart();
+        fadeTransition.playFromStart();
 
     }
 

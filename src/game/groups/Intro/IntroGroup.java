@@ -55,6 +55,7 @@ public class IntroGroup extends StartableGroup {
 
         controller.getFadeIn().setOnFinished(e ->
         {
+            controller.playMusic(15);
             textAppend(startGameText, "ПРОСНУТЬСЯ", 2000);
         });
 
@@ -108,15 +109,6 @@ public class IntroGroup extends StartableGroup {
         };
 
         animation.play();
-
-    }
-
-    public static Pane startCharacterCreation(GameController controller) {
-
-        IntroGroup introGroup = new IntroGroup();
-        introGroup.start(controller);
-        Pane group = introGroup.globalGroup;
-        return group;
 
     }
 

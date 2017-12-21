@@ -1,5 +1,6 @@
 package game.groups.CharacterCreation;
 
+import game.Logic.Character;
 import game.Logic.CharacterParameters;
 import game.utils.FadableButton;
 import game.utils.PointCounter;
@@ -70,6 +71,14 @@ public class CreationMenu {
 
     public VBox getMenuBox() {
         return vBox;
+    }
+
+    public Character getCharacter(){
+        String name = nameChanger.getName();
+        int speech = speechChanger.getParamValue();
+        int cunning = cunnungChanger.getParamValue();
+        int mentality = mentalityChanger.getParamValue();
+        return new Character(name, speech, cunning, mentality);
     }
 
 }

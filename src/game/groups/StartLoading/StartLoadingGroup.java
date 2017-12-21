@@ -76,7 +76,7 @@ public class StartLoadingGroup extends StartableGroup {
 
         changeListener.changed(null, null, null);
         controller.getFadeIn().setOnFinished((ActionEvent event) -> {
-            animateText(consoleText, GameTexts.LOADING_TEXT, 5000, controller);
+            animateText(consoleText, GameTexts.LOADING_TEXT, 500, controller);
             title.setFont(Font.font("Courier New", FontWeight.NORMAL, (int) (Math.sqrt(scene.getHeight()*scene.getWidth()) / 25)));
         });
 

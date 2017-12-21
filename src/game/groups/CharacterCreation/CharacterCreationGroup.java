@@ -86,7 +86,8 @@ public class CharacterCreationGroup extends StartableGroup {
             continueButton.setOnMouseClicked(event -> {
                 controller.fadeOut();
                 controller.getFadeOut().setOnFinished(event1 -> {
-                    controller.changeGroup(GameGroups.INTRO);
+                    controller.createCharacter(creationMenu.getCharacter());
+                    controller.changeGroup(GameGroups.MAIN_GAME);
                 });
             });
         });

@@ -1,8 +1,10 @@
 package game;
 
+import game.Logic.Character;
 import game.groups.*;
 import game.groups.CharacterCreation.CharacterCreationGroup;
 import game.groups.Intro.IntroGroup;
+import game.groups.MainGame.MainGameGroup;
 import game.groups.StartLoading.StartLoadingGroup;
 import game.utils.FadePane;
 import game.utils.GameState;
@@ -28,6 +30,8 @@ public class GameController {
     private final Scene gameScene;
     private final Group totalGroup;
     private final MediaPlayer musicPlayer = initPlayer();
+
+    private Character character;
 
     private Pane activePane;
 
@@ -75,6 +79,12 @@ public class GameController {
         totalGroup.getChildren().add(creation);
     }
 
+    private void runMainGame() {
+        Pane mainGame = MainGameGroup.startMainGame(this);
+        activePane = mainGame;
+        totalGroup.getChildren().add(mainGame);
+    }
+
     public Scene getGameScene() {
         return gameScene;
     }
@@ -110,6 +120,9 @@ public class GameController {
             case CHAR_CREATION:
                 runCharCreation();
                 break;
+            case MAIN_GAME:
+                runMainGame();
+                break;
         }
 
     }
@@ -129,6 +142,14 @@ public class GameController {
 
     public void stopMusic(){
         musicPlayer.stop();
+    }
+
+    public void createCharacter(Character character){
+        this.character = character;
+    }
+
+    public Character getCharacter() {
+        return character;
     }
 
 }

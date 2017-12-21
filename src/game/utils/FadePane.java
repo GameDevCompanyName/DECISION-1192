@@ -2,6 +2,7 @@ package game.utils;
 
 import javafx.animation.FadeTransition;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
@@ -18,10 +19,16 @@ public class FadePane {
     protected FadeTransition fadeOut = new FadeTransition(Duration.seconds(FADE_TIME), blackie);
 
 
-    public FadePane(Group group){
-        group.getChildren().add(blackie);
+    public FadePane(){
         blackie.setFill(Color.BLACK);
         blackie.setOpacity(1.0);
+    }
+
+    public FadePane(double time){
+        blackie.setFill(Color.BLACK);
+        blackie.setOpacity(1.0);
+        fadeOut.setDuration(Duration.seconds(time));
+        fadeIn.setDuration(Duration.seconds(time));
     }
 
     public void fadeIn() {
@@ -45,4 +52,9 @@ public class FadePane {
     public FadeTransition getFadeOut() {
         return fadeOut;
     }
+
+    public Node getNode(){
+        return blackie;
+    }
+
 }

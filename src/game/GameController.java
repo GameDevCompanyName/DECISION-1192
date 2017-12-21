@@ -43,7 +43,8 @@ public class GameController {
     public GameController(Stage stage) {
         gameStage = stage;
         totalGroup = new Group();
-        fade = new FadePane(totalGroup);
+        fade = new FadePane();
+        totalGroup.getChildren().add(fade.getNode());
         gameScene = new Scene(totalGroup,
                 Screen.getPrimary().getBounds().getWidth(),
                 Screen.getPrimary().getBounds().getHeight(),

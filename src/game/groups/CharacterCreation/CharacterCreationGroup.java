@@ -43,7 +43,7 @@ public class CharacterCreationGroup extends StartableGroup {
 
         String imageUri = new File("src/resources/images/GLITCH.gif").toURI().toString();
         Image image = new Image(imageUri);
-        javafx.scene.image.ImageView imageView = new javafx.scene.image.ImageView(image);
+        ImageView imageView = new ImageView(image);
 
         double coef = Screen.getPrimary().getBounds().getHeight()/image.getHeight() * 1.5;
         scaleCenterImage(imageView, coef);

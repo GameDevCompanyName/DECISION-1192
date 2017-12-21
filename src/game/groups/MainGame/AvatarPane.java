@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Duration;
@@ -71,7 +72,8 @@ public class AvatarPane {
         avatarPane.getChildren().add(avatarButton);
         avatarPane.getChildren().addAll(imageAvatar, imageLoading, imageDefault);
 
-        nameLabel = new Label("**********");
+        nameLabel = new Label("--неизвестно--");
+        nameLabel.setTextFill(Color.ANTIQUEWHITE);
         nameLabel.setFont(Font.font("Century Gothic", FontWeight.NORMAL, 50));
 
         box.setStyle("-fx-border-color: black");

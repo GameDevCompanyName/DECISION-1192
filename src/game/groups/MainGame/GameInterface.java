@@ -9,33 +9,32 @@ import javafx.scene.layout.Pane;
 
 public class GameInterface {
 
-    AnchorPane interfacePane;
+    BorderPane interfacePane;
     AvatarPane playerLeft;
     AvatarPane strangerRight;
     InteractivePane interactive;
 
     public GameInterface(GameController controller){
-        playerLeft = new AvatarPane();
-        strangerRight = new AvatarPane();
-        interactive = new InteractivePane();
 
-        interfacePane = new AnchorPane();
-        interfacePane.getChildren().addAll(
-                playerLeft.getBox(),
-                interactive.getBox(),
-                strangerRight.getBox()
-        );
-        AnchorPane.setLeftAnchor(playerLeft.getBox(), 0.0);
-        AnchorPane.setRightAnchor(strangerRight.getBox(), 0.0);
-        AnchorPane.setTopAnchor(interactive.getBox(), 0.0);
+        interfacePane = new BorderPane();
 
         interfacePane.setStyle("-fx-border-color: red");
         interfacePane.prefWidthProperty().bind(controller.getGameScene().widthProperty());
         interfacePane.prefHeightProperty().bind(controller.getGameScene().heightProperty());
+
+        playerLeft = new AvatarPane(this);
+        strangerRight = new AvatarPane(this);
+        interactive = new InteractivePane(this);
+
+
+        interfacePane.setLeft(playerLeft.getBox());
+        interfacePane.setRight(strangerRight.getBox());
+        interfacePane.setCenter(interactive.getBox());
+
     }
 
 
-    public Node getBox() {
+    public BorderPane getBox() {
         return interfacePane;
     }
 }

@@ -43,4 +43,7 @@ public class Character {
         return mentality;
     }
 
+    public Image getAvatar() {
+        return avatar;
+    }
 }

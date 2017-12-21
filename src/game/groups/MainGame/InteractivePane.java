@@ -7,6 +7,10 @@ public class InteractivePane {
 
     VBox box = new VBox();
 
+    public InteractivePane(GameInterface gameInterface) {
+
+    }
+
     public Node getBox() {
         return box;
     }

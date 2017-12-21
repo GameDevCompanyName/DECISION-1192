@@ -9,11 +9,13 @@ import javafx.util.Duration;
 
 public class FadePane {
 
+    public static double FADE_TIME = 0.5;
+
     private Rectangle blackie = new Rectangle(Screen.getPrimary().getBounds().getWidth(),
                                               Screen.getPrimary().getBounds().getHeight());
 
-    protected FadeTransition fadeIn = new FadeTransition(Duration.seconds(2.5), blackie);
-    protected FadeTransition fadeOut = new FadeTransition(Duration.seconds(2.5), blackie);
+    protected FadeTransition fadeIn = new FadeTransition(Duration.seconds(FADE_TIME), blackie);
+    protected FadeTransition fadeOut = new FadeTransition(Duration.seconds(FADE_TIME), blackie);
 
 
     public FadePane(Group group){

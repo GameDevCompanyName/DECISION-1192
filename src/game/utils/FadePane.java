@@ -10,7 +10,7 @@ import javafx.util.Duration;
 
 public class FadePane {
 
-    public static double FADE_TIME = 0.5;
+    public static double FADE_TIME = 4 * Constants.ANIMATION_TIME_SCALE;
 
     private Rectangle blackie = new Rectangle(Screen.getPrimary().getBounds().getWidth(),
                                               Screen.getPrimary().getBounds().getHeight());

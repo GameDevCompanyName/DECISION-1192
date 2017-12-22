@@ -74,7 +74,9 @@ public class AvatarPane {
 
         nameLabel = new Label("--неизвестно--");
         nameLabel.setTextFill(Color.ANTIQUEWHITE);
-        nameLabel.setFont(Font.font("Century Gothic", FontWeight.NORMAL, 50));
+        nameLabel.setFont(Font.font("Century Gothic", FontWeight.NORMAL, 28));
+        nameLabel.scaleXProperty().bind(gameInterface.getBox().widthProperty().divide(1080));
+        nameLabel.scaleYProperty().bind(gameInterface.getBox().widthProperty().divide(1080));
 
         box.setStyle("-fx-border-color: black");
         avatarPane.setStyle("-fx-border-color: green");

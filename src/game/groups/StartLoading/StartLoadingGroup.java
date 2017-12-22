@@ -4,6 +4,7 @@ import game.GameController;
 import game.GameTexts;
 import game.groups.GameGroups;
 import game.groups.StartableGroup;
+import game.utils.Constants;
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
@@ -76,7 +77,7 @@ public class StartLoadingGroup extends StartableGroup {
 
         changeListener.changed(null, null, null);
         controller.getFadeIn().setOnFinished((ActionEvent event) -> {
-            animateText(consoleText, GameTexts.LOADING_TEXT, 6000, controller);
+            animateText(consoleText, GameTexts.LOADING_TEXT, 6000 * Constants.ANIMATION_TIME_SCALE, controller);
             title.setFont(Font.font("Courier New", FontWeight.NORMAL, (int) (Math.sqrt(scene.getHeight()*scene.getWidth()) / 25)));
         });
 
@@ -99,7 +100,7 @@ public class StartLoadingGroup extends StartableGroup {
         imageView.setOpacity(0.1);
     }
 
-    public void animateText(Label label, String string, int time, GameController controller) {
+    public void animateText(Label label, String string, double time, GameController controller) {
 
         String content = string;
 

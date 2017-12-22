@@ -18,9 +18,9 @@ public class GameInterface {
 
         interfacePane = new BorderPane();
 
-        interfacePane.setStyle("-fx-border-color: red");
         interfacePane.prefWidthProperty().bind(controller.getGameScene().widthProperty());
         interfacePane.prefHeightProperty().bind(controller.getGameScene().heightProperty());
+        interfacePane.setMinSize(0, 0);
 
         playerLeft = new AvatarPane(this);
         strangerRight = new AvatarPane(this);

@@ -3,6 +3,7 @@ package game.groups.Intro;
 import game.GameController;
 import game.groups.StartableGroup;
 import game.groups.GameGroups;
+import game.utils.Constants;
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
@@ -56,7 +57,7 @@ public class IntroGroup extends StartableGroup {
         controller.getFadeIn().setOnFinished(e ->
         {
             controller.playMusic(15);
-            textAppend(startGameText, "ПРОСНУТЬСЯ", 2000);
+            textAppend(startGameText, "ПРОСНУТЬСЯ", 2000 * Constants.ANIMATION_TIME_SCALE);
         });
 
         changeListener.changed(null, null, null);
@@ -64,7 +65,7 @@ public class IntroGroup extends StartableGroup {
 
     }
 
-    public void textAppend(Text text, String string, int time) {
+    public void textAppend(Text text, String string, double time) {
 
         String content = string;
 

@@ -6,5 +6,6 @@ public class Constants {
 
 
     public final static double CONSOLE_HEIGHT_SCALE = 0.6;
+    public final static double CONSOLE_WIDTH_SCALE = 0.6;
 
 }

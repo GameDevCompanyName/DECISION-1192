@@ -1,6 +1,7 @@
 package game.groups.MainGame;
 
 import game.Logic.Character;
+import game.utils.Constants;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -35,7 +36,8 @@ public class AvatarPane {
         box = new VBox();
         box.setAlignment(Pos.TOP_CENTER);
         box.spacingProperty().bind(gameInterface.getBox().heightProperty().divide(22));
-        box.prefWidthProperty().bind(gameInterface.getBox().widthProperty().divide(4.6));
+        box.prefWidthProperty().bind(gameInterface.getBox().widthProperty().multiply((1 - Constants.CONSOLE_WIDTH_SCALE)/2));
+        box.maxWidthProperty().bind(gameInterface.getBox().widthProperty().multiply((1 - Constants.CONSOLE_WIDTH_SCALE)/2));
 
         imageDefault = new ImageView(new Image(new File("src/resources/images/AVATARS/UNKNOWN.gif").toURI().toString()));
         imageLoading = new ImageView(new Image(new File("src/resources/images/AVATARS/LOADING.gif").toURI().toString()));
@@ -59,10 +61,10 @@ public class AvatarPane {
                 "  -fx-background-insets: 0, 50;\n" +
                 "  -fx-background-radius: 6px, 0px;\n");
 
-        avatarPane.maxWidthProperty().bind(box.widthProperty().divide(1.1));
-        avatarPane.maxHeightProperty().bind(box.widthProperty().divide(1.1));
-        avatarPane.prefWidthProperty().bind(box.widthProperty().divide(1.1));
-        avatarPane.prefHeightProperty().bind(box.widthProperty().divide(1.1));
+        avatarPane.maxWidthProperty().bind(box.widthProperty().divide(1.13));
+        avatarPane.maxHeightProperty().bind(box.widthProperty().divide(1.13));
+        avatarPane.prefWidthProperty().bind(box.widthProperty().divide(1.13));
+        avatarPane.prefHeightProperty().bind(box.widthProperty().divide(1.13));
 
         avatarButton.maxWidthProperty().bind(avatarPane.widthProperty());
         avatarButton.maxHeightProperty().bind(avatarPane.widthProperty());

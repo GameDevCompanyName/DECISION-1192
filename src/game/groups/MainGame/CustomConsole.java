@@ -4,93 +4,126 @@ import java.util.Random;
 
 import game.GameTexts;
 import game.utils.Constants;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
-import javafx.animation.Transition;
+import javafx.animation.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Background;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.util.Duration;
 
 public class CustomConsole {
 
-    ScrollPane box;
-    Label textArea;
+    StackPane mainBox;
+    ScrollPane scrollPane;
+    VBox textBox;
+    Rectangle consoleBackground;
+    Font font;
 
     public CustomConsole(GameInterface gameInterface){
 
-        box = new ScrollPane();
-        box.prefWidthProperty().bind(gameInterface.getBox().widthProperty().divide(2.6));
-        box.prefHeightProperty().bind(gameInterface.getBox().heightProperty().multiply(Constants.CONSOLE_HEIGHT_SCALE));
-        box.setBackground(Background.EMPTY);
-        box.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        box.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        //box.setFitToWidth(true);
-        box.setStyle("-fx-background-color: transparent;\n" +
+        mainBox = new StackPane();
+        textBox = new VBox();
+        scrollPane = new ScrollPane();
+        font = Font.font("Courier New", FontWeight.LIGHT, 16);
+
+        mainBox.prefWidthProperty().bind(gameInterface.getBox().widthProperty().multiply(Constants.CONSOLE_WIDTH_SCALE));
+        mainBox.prefHeightProperty().bind(gameInterface.getBox().heightProperty().multiply(Constants.CONSOLE_HEIGHT_SCALE));
+        mainBox.setStyle("-fx-border-color: red");
+        mainBox.setAlignment(Pos.CENTER);
+
+        ChangeListener changeListener = new ChangeListener() {
+            @Override
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                mainBox.setMaxSize(gameInterface.getBox().getWidth()/2.6,
+                        gameInterface.getBox().getHeight()*Constants.CONSOLE_HEIGHT_SCALE);
+            }
+        };
+        gameInterface.getBox().widthProperty().addListener(changeListener);
+        gameInterface.getBox().heightProperty().addListener(changeListener);
+
+        consoleBackground = new Rectangle();
+        consoleBackground.setStyle("-fx-border-color: blue");
+        consoleBackground.widthProperty().bind(mainBox.prefWidthProperty());
+        consoleBackground.heightProperty().bind(mainBox.prefHeightProperty());
+        consoleBackground.setFill(Color.BLACK);
+        consoleBackground.setOpacity(0.6);
+
+        textBox.heightProperty().addListener(event -> {
+            slowScrollToBottom();
+        });
+
+        scrollPane.setContent(textBox);
+        scrollPane.setStyle("-fx-border-color: green");
+        scrollPane.prefWidthProperty().bind(mainBox.prefWidthProperty());
+        scrollPane.prefHeightProperty().bind(mainBox.prefHeightProperty());
+        scrollPane.setBackground(Background.EMPTY);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setStyle("-fx-background-color: transparent;\n" +
                 "-fx-background: transparent;");
 
-        textArea = new Label();
-        textArea.setStyle("-fx-border-color: orange");
-        textArea.setTextFill(Color.RED);
-        textArea.textProperty().addListener(event -> {
-            slowScrollToBottom(box);
-        });
+        mainBox.getChildren().addAll(consoleBackground, scrollPane);
 
-        box.setContent(textArea);
-
-        texttext(box, textArea);
+        for (int i = 0; i < 100; i++){
+            textAppend(GameTexts.randomLoadingText());
+        }
 
     }
 
-    private void slowScrollToBottom(ScrollPane scrollPane) {
+    private void slowScrollToBottom() {
         Animation animation = new Timeline(
-                new KeyFrame(Duration.seconds(0.5),
-                        new KeyValue(scrollPane.vvalueProperty(), 1)));
+                new KeyFrame(Duration.seconds(1),
+                        new KeyValue(scrollPane.vvalueProperty(), 1.0)));
         animation.play();
     }
 
-    private void texttext(ScrollPane scrollPane, Label textArea) {
-        Animation animation = new Timeline(
-                new KeyFrame(Duration.seconds(2),
-                        null));
-        animation.setOnFinished(event -> {
-            texttext(scrollPane, textArea);
-            textAppend("RJRJ RJRJRJ RAJLSS :UDGFIUW 123123 #$@#@ @#*&@($@# ASKJDHLASUD (#&$@# ");
-        });
-        animation.play();
+    private void textAppend(String text, MessageType messageType) {
+
+        Label newText = new Label(text);
+
+        newText.setFont(font);
+        newText.setWrapText(true);
+        newText.setStyle("-fx-border-color: orange");
+        newText.maxWidthProperty().bind(scrollPane.widthProperty());
+
+        switch (messageType){
+
+            case DEFAULT:
+                newText.setTextFill(Color.LIGHTGREEN);
+                break;
+
+        }
+
+        textBox.getChildren().add(newText);
+
+        slowScrollToBottom();
+
     }
 
     private void textAppend(String text) {
-        for (char character: text.toCharArray()) {
-            textArea.setText(textArea.getText() + character);
-            checkLenght();
-        }
-    }
 
-    private void checkLenght() {
-        if (textArea.getWidth() > box.getWidth()){
-            String lolex = textArea.getText();
-            int index = 0;
-            for (int i = lolex.length() - 1; i > 0; i--){
-                if (lolex.charAt(i) == ' '){
-                    index = i;
-                    break;
-                }
-            }
-            String kekas = lolex.substring(0, index) + "\n" + lolex.substring(index, lolex.length() - 1);
-            textArea.setText(kekas);
-        }
+        textAppend(text, MessageType.DEFAULT);
+
     }
 
     public Node getBox() {
-        return box;
+        return mainBox;
+    }
+
+    private enum MessageType {
+
+        DEFAULT, IMPORTANT
+
     }
 
 }

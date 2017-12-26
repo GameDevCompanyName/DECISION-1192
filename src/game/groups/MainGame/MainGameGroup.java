@@ -1,5 +1,6 @@
 package game.groups.MainGame;
 
+import TextGameOld.igorlo.InteractiveConsole;
 import game.GameController;
 import game.Logic.Character;
 import game.groups.StartableGroup;
@@ -54,6 +55,13 @@ public class MainGameGroup extends StartableGroup {
 
         controller.getFadeIn().setOnFinished(event -> {
             gameInterface.playerLeft.putCharacter(player);
+        });
+
+        final InteractiveConsole oldGameConsole = new InteractiveConsole(gameInterface);
+        gameInterface.setChoiceGetter(oldGameConsole.pray);
+
+        controller.getFadeIn().setOnFinished(event -> {
+            oldGameConsole.conversate();
         });
 
         controller.fadeIn();

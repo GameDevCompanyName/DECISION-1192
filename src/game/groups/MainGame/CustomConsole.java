@@ -87,7 +87,7 @@ public class CustomConsole {
         animation.play();
     }
 
-    private void textAppend(String text, MessageType messageType) {
+    public void textAppend(String text, MessageType messageType) {
 
         Label newText = new Label(text);
 
@@ -110,7 +110,7 @@ public class CustomConsole {
 
     }
 
-    private void textAppend(String text) {
+    public void textAppend(String text) {
 
         textAppend(text, MessageType.DEFAULT);
 

@@ -1,11 +1,14 @@
 package game.groups.MainGame;
 
+import TextGameOld.igorlo.InteractiveConsole;
 import game.GameController;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+
+import java.io.InputStream;
 
 public class GameInterface {
 
@@ -36,5 +39,17 @@ public class GameInterface {
 
     public BorderPane getBox() {
         return interfacePane;
+    }
+
+    public void appendText(String wordOfGod) {
+        interactive.appendText(wordOfGod);
+    }
+
+    public void setChoiceGetter(InteractiveConsole.ChoiceGetter choiceGetter) {
+        this.interactive.setChoiceGetter(choiceGetter);
+    }
+
+    public InputStream getStream() {
+        return interactive.getStream();
     }
 }
